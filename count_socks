@@ -1,0 +1,48 @@
+pants :: 3
+socks ::
+	high q :: 6
+	low q :: 5
+dress :: 1 (out of the three maybes)
+shirt :: 1
+bras ::
+	comfy :: 4
+	else :: 1
+shorts ::
+	tight :: 2
+	comfy-in :: 1
+	comfy-out :: 2
+hats :: 1 beige cap, 1 beanie
+long-sleeves :: 3
+hand-washer :: 3
+face towel :: 3
+vest :: 2
+turtle necks :: 9
+sweater ::
+	hot :: 2
+	else :: 1
+	light :: 1
+tank-top :: 2
+shiny :: 2
+tights :: 1
+underwear :: 10
+jacket :: 2
+t-shirt ::
+	basic :: 3
+	polo :: 1
+pjs :: 2
+leggings :: 1
+gloves ::
+	nice :: 1
+scarf :: 1
+belt :: 2
+
+shoes ::
+	trainers :: 1
+
+
+missing ::
+t-shirt :: 1 black (wet ?), 1 brown (wet), 1 white (wet)
+jacket :: nina's (wet)
+long-sleeves :: grey, grey-striped (wet)
+pj pants (wet)
+green sweater (wet)
