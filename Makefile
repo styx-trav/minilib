@@ -1,7 +1,7 @@
 CC=cc
 FLAGS=-Wall -Werror -Wextra
 NAME=try
-OBJ=tryer.c
+OBJ=complex_maker.c
 
 all: $(NAME)
 

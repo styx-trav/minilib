@@ -31,3 +31,29 @@ graphs ::
 notes :: cant seem to find whether or not im allowed the complex header and functions :: we ll rewrite the equ from scratch if necessary ; for now we use the :: double complex = CMPLX(real, img);;
 
 testing in the real numbers only rn, and with no neg numbers (so backwards from the usual axes) :: calc functions done, now to combine with our mlx so I can act see it
+
+beautiful !!! they're all so gorgeous, also made my own complex nums going strong now. Here a given of the architecture i'd like to see ::
+
+argvs ::
+	single characters : m for mandel, j for julia, others for other kinds of fractals of course;
+	c : given as two argvs, real then img (unforgiving atoi, dot for float);
+	looper : given as a y/n, will loop trough every value of c constantly
+	end : one arg, full int, max number of iterations;
+
+in my struct ::
+	center : current center of the fractal (0, 0), changed by the clicking of the mouse to any part of the screen;
+	pixel : current scale pixel/axis (0.005), multed or divvied by the zoom feature;
+	vert : (800), adjusted with the resize-redirect window;
+	hor : (800), //
+	c : complex_c, either chosen or looping (-1, -1 -> 1, 1 :: 0.001) throughout;
+	the usuals : mlx/win/current_img/next_img(?)
+	cap : (2);
+	end : (100) or chosen (will affect the speed of the image rendering, esp for big images, will also affect the precision work (more black));
+	equation : the chosen fractal equation (m, j, others);
+
+calculations ::
+	x : center - hor / 2, then < center + hor / 2 + hor % 2;
+	y : center - vert / 2, then < center + vert / 2 + vert % 2;
+	z : {x * pixel, y * pixel};
+	color : decide on the color scheme (green, red, blue), then * scale and % 255, get_color for each;
+

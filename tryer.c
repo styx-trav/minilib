@@ -56,6 +56,17 @@ int get_green(int color, int shade)
   return ((*(int *)maker));
 }
 
+int get_red(int color, int shade)
+{
+  unsigned char maker[4];
+  
+  maker[0] = ((unsigned char *)&color)[0];
+  maker[1] = ((unsigned char *)&color)[1];
+  maker[2] = ((unsigned char *)&color)[2] + shade;
+  maker[3] = ((unsigned char *)&color)[3];
+  return ((*(int *)maker));
+}
+
 void  gradient_line(t_data *data, int x, int y, int len, int color)
 {
   int shade;
