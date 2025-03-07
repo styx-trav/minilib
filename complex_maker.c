@@ -122,7 +122,6 @@ void  make_fractal(int hor, int vert, int end, double cap, t_data *img)
   t_cpx c;
   c.real = -0.4;
   c.img = 0.6;
-  int max_scale = -1;
 
   while (x < hor - hor / 2)
   {
@@ -130,8 +129,6 @@ void  make_fractal(int hor, int vert, int end, double cap, t_data *img)
     while (y < vert - vert / 2)
     {
       scale = clr_scale(pixel, (double)x, (double)y, &c, end, cap);
-      if (scale > max_scale)
-        max_scale = scale;
       if (scale != -1 && scale != 0)
       {
         if (scale == 0)
@@ -144,7 +141,6 @@ void  make_fractal(int hor, int vert, int end, double cap, t_data *img)
     }
     x++;
   }
-  printf("max_scale :: %d\n", max_scale);
 }
 
 int main(void)
@@ -178,4 +174,4 @@ int main(void)
   free(mlx);
 }
 
-//was confused for a second but it actually looks really really promising !! still need to adjust the colors a little and play around with it, but i'm actuall really pleased :]
+//was confused for a second but it actually looks really really promising !! still need to adjust the colors a little and play around with it, but i'm actually really pleased :]

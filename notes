@@ -1,37 +1,3 @@
-maths ::
-	julia fractal ::
-		common functions : z4 = csin(z3), or cexp(z3), or c /? cos(z3) or cz3(1 - z3), (or z3^2 + c);
-		goal :: for what z complex number do we tend to infinity, and how fast;
-		calc :: every coord gets a z = x + iy complex, plugged into the chosen equation.
-		disp :: different color based on the module(%2, i think ? maybe based on the c given) of the abs value for a given n;
-
-
-ex :: int equ(z, c) { return (z * z + c)
-for a given (x, y) in the plane ::
-int	is_stable(z, end, c)
-	while (n < end)
-		if (abs(z) > 2)
-			return (-1);
-		z = equ(z, c);
-		n++;
-	return (n);
-
-int	clr_scale(x, y, end, c)
-	complex z = cmplx(x, y);
-	scale = is_stable(z, end, c);
-
-and then scale the color according to the precision given. also keep in mind the precision of x, y to add the correct amount of distance for a given (round) pixel position. (maybe take in as argument the size of the graph wanted ? and adjust on zoom if needed.)
-
-graphs ::
-	disp :: almost done, just needing the mathematical equations to choose the display (and the red cross for closing)
-	
-	memory :: still working (destroy img after new one is pushed, and then supposedly :: end loop, destroy current img, destroy window, destroy/free mlx)
-	
-
-notes :: cant seem to find whether or not im allowed the complex header and functions :: we ll rewrite the equ from scratch if necessary ; for now we use the :: double complex = CMPLX(real, img);;
-
-testing in the real numbers only rn, and with no neg numbers (so backwards from the usual axes) :: calc functions done, now to combine with our mlx so I can act see it
-
 beautiful !!! they're all so gorgeous, also made my own complex nums going strong now. Here a given of the architecture i'd like to see ::
 
 argvs ::
@@ -57,3 +23,13 @@ calculations ::
 	z : {x * pixel, y * pixel};
 	color : decide on the color scheme (green, red, blue), then * scale and % 255, get_color for each;
 
+
+
+//notes ::
+- still need to try out the red cross closing thing, thought I had it and didn't;
+- mandelbrot is just c as the changing variable (x, y), starting z as z0 = 0;
+- might want to speed up those calculations by moving 2by2, 3by3, etc. play around find what feels good disp wise (feels slow rn);
+- do the parsing (obv)
+- find out other fractals we might like to do;
+- compartmentalize to the max - makes it so much easier to read, i swear :: all hooks in the same func, parsing aside, separate equations in one and utils in another, colors excluded;
+- find out how to work the zoom thing - clicking seems easy enough, id like to find out if we can measure how much zoom is needed :: also the window resize;
