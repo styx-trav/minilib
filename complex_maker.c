@@ -30,6 +30,22 @@ int close(int keycode, t_vars *vars)
   return (0);
 }
 
+int exitt(t_vars *vars)
+{
+	mlx_loop_end(vars->mlx);
+ 	return (0);
+}
+#include <stdio.h>
+int	disp_click(int button, int x, int y, t_data *vars)
+{
+	(void)vars;
+	printf("here button : %d pushed at x : %d, y : %d\n", button, x, y);
+	return (0);
+}
+//1 for left click;
+//3 for right;
+//zoom out 5;
+//zoom in 4;
 void  my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
   char	*dst;
@@ -61,6 +77,17 @@ t_cpx *c_equ(t_cpx *z, t_cpx *c)
   return (z);
 }
 
+t_cpx	*ship_equ(t_cpx *z, t_cpx *c)
+{
+	if (z->real < 0)
+		z->real = -z->real;
+	if (z->img < 0)
+		z->img = -z->img;
+	z = square(z);
+	z = add(z, c);
+	return (z);
+}
+
 double  c_abs(t_cpx *z)
 {
   double  res = z->real * z->real + z->img * z->img;
@@ -71,12 +98,15 @@ double  c_abs(t_cpx *z)
 int is_stable(t_cpx *z, t_cpx *c, int end, double cap)
 {
   int n = 0;
+  t_cpx	tmp;
   
+  tmp.real = z->real;
+  tmp.img = z->img;
   while (n < end)
   {
-    if (c_abs(z) > cap)
+    if (c_abs(&tmp) > cap)
       return (n);
-    z = c_equ(z, c);
+    tmp = *(ship_equ(&tmp, c));
     n++;
   }
   return (-1);
@@ -106,13 +136,45 @@ int get_color(int scale, int shade)
 {
   int color = 0x00000000;
 
-  shade = 255 / shade;
-  shade = shade * scale;
+  shade = 180 / shade;
+  shade = shade * scale + 75;
   color = get_blue(color, shade);
   return (color);
 }
   
-#include <stdio.h>
+void	make_mandel(int hor, int vert, int end, double cap, t_data *img)
+{
+	int x = - (hor / 2);
+	int y;
+	double pixel = 0.005;
+	int scale;
+	t_cpx c;
+	t_cpx	z;
+	
+	z.real = 0;
+	z.img = 0;
+	while (x < hor - hor / 2)
+	{
+		y = -vert / 2;
+		while (y < vert - vert / 2)
+		{
+			c.real = x * pixel;
+			c.img = y * pixel;
+			scale = is_stable(&z, &c, end, cap);
+			if (scale != -1)
+			{
+				if (scale == 0)
+				  scale = 0x00FFFFFF;
+				else
+				  scale = get_color(scale, 255);
+				my_mlx_pixel_put(img, x + hor / 2, y + vert / 2, scale);
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
 void  make_fractal(int hor, int vert, int end, double cap, t_data *img)
 {
   int x = - (hor / 2);
@@ -134,7 +196,7 @@ void  make_fractal(int hor, int vert, int end, double cap, t_data *img)
         if (scale == 0)
           scale = 0x00FFFFFF;
         else
-          scale = get_color(scale, 255);
+          scale = get_color(scale, 180);
         my_mlx_pixel_put(img, x + hor / 2, y + vert / 2, scale);
       }
       y++;
@@ -163,10 +225,12 @@ int main(void)
   vars.win = mlx_win;
   img.img = mlx_new_image(mlx, 800, 800);
   img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-  make_fractal(800, 800, 255, 2, &img);
+  //make_fractal(800, 800, 255, 2, &img);
+  make_mandel(800, 800, 180, 2, &img);
   mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
   mlx_hook(vars.win, 2, 1L<<0, &close, &vars);
-  mlx_hook(vars.win, 17, 0, &close, &vars);
+  mlx_hook(vars.win, 17, 0, &exitt, &vars);
+  mlx_mouse_hook(vars.win, &disp_click, &vars);
   mlx_loop(mlx);
   mlx_destroy_image(mlx, img.img);
   mlx_destroy_window(mlx, mlx_win);

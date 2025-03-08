@@ -13,7 +13,7 @@ in my struct ::
 	hor : (800), //
 	c : complex_c, either chosen or looping (-1, -1 -> 1, 1 :: 0.001) throughout;
 	the usuals : mlx/win/current_img/next_img(?)
-	cap : (2);
+	cap : (2) or chosen (affects speed as well);
 	end : (100) or chosen (will affect the speed of the image rendering, esp for big images, will also affect the precision work (more black));
 	equation : the chosen fractal equation (m, j, others);
 

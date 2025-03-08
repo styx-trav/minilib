@@ -57,8 +57,11 @@ int get_red(int color, int shade);
 //for now, getting just the blue shade variations (monochromatic)
 int get_color(int scale, int shade);
 
-//mostly utils
+//hook funcs
 int close(int keycode, t_vars *vars);
+int exitt(t_vars *vars);
+
+//pixel put and complex utils
 void  my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_cpx *add(t_cpx *z, t_cpx *c);
 t_cpx *square(t_cpx *z);
