@@ -16,6 +16,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdlib.h>
+# include <unistd.h>
 //# include <stdio.h>
 
 typedef struct  s_cpx
@@ -49,7 +50,7 @@ typedef struct  s_all
   void  (*fractal)(struct s_all *);
 }             t_all;
 
-//color utils
+/*//color utils
 int get_blue(int color, int shade);
 int get_green(int color, int shade);
 int get_red(int color, int shade);
@@ -70,6 +71,18 @@ double  c_abs(t_cpx *z);
 
 //main equation call functions (here julia/mandel)
 int is_stable(t_cpx *z, t_cpx *c, int end, double cap);
-int	clr_scale(double pixel, double x, double y, t_cpx *c, int end, double cap);
+int	clr_scale(double pixel, double x, double y, t_cpx *c, int end, double cap);*/
 
+//parsing.c
+int	parsing(t_all *str, int argc, char **argv);
+
+//parsing_utils.c
+int	parsing_check(t_all *str);
+double	get_double(char *value);
+void	print_parsing(void);
+void	print(char *str);
+
+//parsing_utils_2.c
+int	found(char *str, char *find);
+char	*get_var(char *s);
 #endif
