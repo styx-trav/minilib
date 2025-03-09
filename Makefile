@@ -1,7 +1,7 @@
 CC=cc
 FLAGS=-Wall -Werror -Wextra
 NAME=try
-OBJ=fractals.c parsing.c parsing_utils.c parsing_utils_2.c
+OBJ=fractals.c parsing.c parsing_utils.c parsing_utils_2.c make_fr.c utils.c hooks.c colors.c 
 
 all: $(NAME)
 

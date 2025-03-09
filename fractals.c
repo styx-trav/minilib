@@ -13,19 +13,13 @@
 #include "libby.h"
 #include <stdio.h>
 
-void	hooks(t_all *all)
-{
-	(void)all;
-	//mlx_hook(all->win, 2, 1L<<0, &close, all);
-	//mlx_hook(all->win, 17, 0, &exitt, all);
-	//mlx_mouse_hook(all->win, &zoom_or_recenter, all);
-	//mlx_loop_hook(all->win, //here if we want the looping c in julia)
-}
-
 int	free_str(t_all *str)
 {
-	if (str->current_img)
-		mlx_destroy_image(str->mlx, str->current_img->img);
+	if (str->img)
+	{
+		mlx_destroy_image(str->mlx, str->img->img);
+		free(str->img);
+	}
 	if (str->win)
 		mlx_destroy_window(str->mlx, str->win);
 	if (str->mlx)
@@ -53,14 +47,14 @@ t_all	*make_struct(void)
 	}
 	str->c->real = -0.4;
 	str->c->img = 0.6;
-	str->center_x = 400;
-	str->center_y = 400;
+	str->center_x = 0;
+	str->center_y = 0;
 	str->vert = 800;
 	str->hor = 800;
-	str->pixel = 0.0025;
+	str->pixel = 0.005;
 	str->mlx = NULL;
 	str->win = NULL;
-	str->current_img = NULL;
+	str->img = NULL;
 	//str->next_img = NULL;
 	str->cap = 2;
 	str->end = 100;
@@ -72,28 +66,34 @@ t_all	*make_struct(void)
 int	main(int argc, char **argv)
 {
 	t_all	*str;
-	//t_data	img;
 
 	str = make_struct();
 	if (!str)
 		return (0);
 	if (parsing(str, argc, argv) == -1)
+	{
+		printf("here the fractal :: ");
+		if (str->fractal == &julia)
+			printf("Julia\n");
+		if (str->fractal == &mandel)
+			printf("Mandel\n");
+		if (str->fractal == &b_ship)
+			printf("Burning ship\n");
 		return (free_str(str));
-	printf("result of parsing ::\nMAX_ITER=%d, CAP=%d, C_REAL=%.3f, C_IM=%.3f\n", str->end, (int)str->cap, str->c->real, str->c->img);
-	return (free_str(str));
-	/*str->mlx = mlx_init();
+	}
+	//return (free_str(str));
+	str->mlx = mlx_init();
 	if (!str->mlx)
 		return (free_str(str));
 	str->win = mlx_new_window(str->mlx, 800, 800, "fractals");
 	if (!str->win)
 		return (free_str(str));
-	img.img = mlx_new_image(str->mlx, 800, 800);
-	if (!img.img)
+	str->img = make_img(str);
+	if (!str->img)
 		return (free_str(str));
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	str->current_img = &img;
 	make_fractal(str);
+	mlx_put_image_to_window(str->mlx, str->win, str->img->img, 0, 0);
 	hooks(str);
 	mlx_loop(str->mlx);
-	return (free_str(str));*/
+	return (free_str(str));
 }

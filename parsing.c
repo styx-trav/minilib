@@ -54,8 +54,8 @@ static int	assign_c(t_all *str, char *value, char type)
 
 static int	get_value(char *s)
 {
-	//if (found(s, "FRACTAL"))
-		//return (1);
+	if (found(s, "FRACTAL"))
+		return (1);
 	if (found(s, "C_REAL"))
 		return (2);
 	if (found(s, "C_IM"))
@@ -74,17 +74,17 @@ static int	assign_var(t_all *str, int type, char *s)
 	value = get_var(s);
 	if (!value)
 		return (-1);
-	/*if (type == 1)
+	if (type == 1)
 	{
 		if (value[0] == 'J' || value[0] == 'j')
 			str->fractal = &julia;
 		else if (value[0] == 'M' || value[0] == 'm')
 			str->fractal = &mandel;
 		else if (value[0] == 'B' || value[0] == 'b')
-			str->fractal = &burning_ship;
+			str->fractal = &b_ship;
 		else
 			return (-1);
-	}*/
+	}
 	else if (type == 2)
 		return (assign_c(str, value, 'r'));
 	else if (type == 3)

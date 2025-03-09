@@ -32,4 +32,4 @@ calculations ::
 - do the parsing (obv)
 - find out other fractals we might like to do;
 - compartmentalize to the max - makes it so much easier to read, i swear :: all hooks in the same func, parsing aside, separate equations in one and utils in another, colors excluded;
-- find out how to work the zoom thing - clicking seems easy enough, id like to find out if we can measure how much zoom is needed :: also the window resize;
+- find out how to work the zoom thing - clicking seems easy enough, id like to find out if we can measure how much zoom is needed :: also the window resize (??? cant find nothing on that, asking around);

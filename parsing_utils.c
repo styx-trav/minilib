@@ -77,8 +77,7 @@ double	get_double(char *value)
 
 int	parsing_check(t_all *str)
 {
-	(void)str;
-	//if (!str->fractal)
-		//return (-1);
+	if (!str->fractal)
+		return (-1);
 	return (0);
 }

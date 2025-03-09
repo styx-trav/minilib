@@ -17,72 +17,73 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
-//# include <stdio.h>
 
-typedef struct  s_cpx
+typedef struct	s_cpx
 {
-  double  real;
-  double  img;
-}               t_cpx;
+	double	real;
+	double	img;
+}			t_cpx;
 
 typedef struct	s_data {
-  void	*img;
-  char	*addr;
-  int bits_per_pixel;
-  int line_length;
-  int endian;
-}				t_data;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		endian;
+}			t_data;
 
-typedef struct  s_all
+typedef struct	s_all
 {
-  int center_x;
-  int center_y;
-  double  pixel;
-  int vert;
-  int hor;
-  void  *mlx;
-  void  *win;
-  t_data  *current_img;
-  //t_data  *new_img;
-  t_cpx *c;
-  double  cap;
-  int end;
-  void  (*fractal)(struct s_all *);
-}             t_all;
+	int		center_x;
+	int		center_y;
+	double	pixel;
+	int		vert;
+	int		hor;
+	void	*mlx;
+	void	*win;
+	t_data	*img;
+	t_cpx	*c;
+	double	cap;
+	int		end;
+	void	(*fractal)(t_cpx *, t_cpx *);
+}			t_all;
 
-/*//color utils
-int get_blue(int color, int shade);
-int get_green(int color, int shade);
-int get_red(int color, int shade);
+//colors.c
+int		get_blue(int color, int shade);
+int		get_green(int color, int shade);
+int		get_red(int color, int shade);
+int		get_color(int scale);
+void	my_mlx_pixel_put(t_all *str, int x, int y, int color);
 
-//for now, getting just the blue shade variations (monochromatic)
-int get_color(int scale, int shade);
+//hooks.c
+void	hooks(t_all *all);
+int		closer(int keycode, t_all *str);
+int		exitt(t_all *str);
+int		zoom_or_recenter(int button, int x, int y, t_all *str);
 
-//hook funcs
-int close(int keycode, t_vars *vars);
-int exitt(t_vars *vars);
+//utils.c
+t_cpx	*add(t_cpx *z, t_cpx *c);
+t_cpx	*square(t_cpx *z);
+double	c_abs(t_cpx *z);
+t_data	*make_img(t_all *str);
 
-//pixel put and complex utils
-void  my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_cpx *add(t_cpx *z, t_cpx *c);
-t_cpx *square(t_cpx *z);
-t_cpx *c_equ(t_cpx *z, t_cpx *c);
-double  c_abs(t_cpx *z);
-
-//main equation call functions (here julia/mandel)
-int is_stable(t_cpx *z, t_cpx *c, int end, double cap);
-int	clr_scale(double pixel, double x, double y, t_cpx *c, int end, double cap);*/
+//make_fr.c
+void	b_ship(t_cpx *z, t_cpx *c);
+void	mandel(t_cpx *z, t_cpx *c);
+void	julia(t_cpx *z, t_cpx *c);
+int		is_stable(double x, double y, t_all *str);
+void	make_fractal(t_all *str);
 
 //parsing.c
-int	parsing(t_all *str, int argc, char **argv);
+int		parsing(t_all *str, int argc, char **argv);
 
 //parsing_utils.c
-int	parsing_check(t_all *str);
+int		parsing_check(t_all *str);
 double	get_double(char *value);
 void	print_parsing(void);
 void	print(char *str);
 
 //parsing_utils_2.c
-int	found(char *str, char *find);
+int		found(char *str, char *find);
 char	*get_var(char *s);
 #endif
