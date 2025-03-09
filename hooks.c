@@ -52,8 +52,8 @@ int	zoom_or_recenter(int button, int x, int y, t_all *str)
 
 void	hooks(t_all *all)
 {
-	mlx_hook(all->win, 2, 1L<<0, &closer, all);
+	mlx_hook(all->win, 2, 1L << 0, &closer, all);
 	mlx_hook(all->win, 17, 0, &exitt, all);
 	mlx_mouse_hook(all->win, &zoom_or_recenter, all);
-	//mlx_loop_hook(all->win, //here if we want the looping c in julia)
 }
+//mlx_loop_hook(all->win, //here if we want the looping c in julia)

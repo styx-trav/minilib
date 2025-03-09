@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libby.h"
-#include <stdio.h>
 
 int	free_str(t_all *str)
 {
@@ -55,11 +54,9 @@ t_all	*make_struct(void)
 	str->mlx = NULL;
 	str->win = NULL;
 	str->img = NULL;
-	//str->next_img = NULL;
 	str->cap = 2;
 	str->end = 100;
-	str->fractal = NULL; //coud we put the equ function here instead of having separate functions for different fractals ?
-	//feels like if done right the equ can just have the x and y and c and figure it out from there, no
+	str->fractal = NULL;
 	return (str);
 }
 
@@ -71,17 +68,7 @@ int	main(int argc, char **argv)
 	if (!str)
 		return (0);
 	if (parsing(str, argc, argv) == -1)
-	{
-		printf("here the fractal :: ");
-		if (str->fractal == &julia)
-			printf("Julia\n");
-		if (str->fractal == &mandel)
-			printf("Mandel\n");
-		if (str->fractal == &b_ship)
-			printf("Burning ship\n");
 		return (free_str(str));
-	}
-	//return (free_str(str));
 	str->mlx = mlx_init();
 	if (!str->mlx)
 		return (free_str(str));

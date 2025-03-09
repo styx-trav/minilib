@@ -33,7 +33,7 @@ void	julia(t_cpx *z, t_cpx *c)
 
 int	is_stable(double x, double y, t_all *str)
 {
-	int	n;
+	int		n;
 	t_cpx	tmp;
 
 	n = 0;
@@ -62,10 +62,10 @@ void	make_fractal(t_all *str)
 	int	y;
 	int	scale;
 
-	x = - str->hor / 2;
+	x = -str->hor / 2;
 	while (x < str->hor - str->hor / 2)
 	{
-		y = - str->vert / 2;
+		y = -str->vert / 2;
 		while (y < str->vert - str->vert / 2)
 		{
 			scale = is_stable((double)x, (double)y, str);

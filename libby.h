@@ -18,13 +18,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_cpx
+typedef struct s_cpx
 {
 	double	real;
 	double	img;
 }			t_cpx;
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -32,7 +33,7 @@ typedef struct	s_data {
 	int		endian;
 }			t_data;
 
-typedef struct	s_all
+typedef struct s_all
 {
 	int		center_x;
 	int		center_y;
