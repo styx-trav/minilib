@@ -35,6 +35,7 @@ int	is_stable(double x, double y, t_all *str)
 {
 	int		n;
 	t_cpx	tmp;
+	double	cap;
 
 	n = 0;
 	tmp.real = (x + str->center_x) * str->pixel;
@@ -46,16 +47,22 @@ int	is_stable(double x, double y, t_all *str)
 		tmp.real = 0;
 		tmp.img = 0;
 	}
+	cap = c_abs(&tmp) + c_abs(str->c) + 0.5;
 	while (n < str->end)
 	{
-		if (c_abs(&tmp) > str->cap)
+		if (c_abs(&tmp) > cap)
 			return (n);
 		str->fractal(&tmp, str->c);
+		if (n > str->end / 2)
+		{
+			n++;
+			str->fractal(&tmp, str->c);
+		}
 		n++;
 	}
 	return (-1);
 }
-
+//max end calcs incoming, checking speed first
 void	make_fractal(t_all *str)
 {
 	int	x;
