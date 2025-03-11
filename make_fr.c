@@ -47,7 +47,7 @@ int	is_stable(double x, double y, t_all *str)
 		tmp.real = 0;
 		tmp.img = 0;
 	}
-	cap = c_abs(&tmp) + c_abs(str->c) + 0.5;
+	cap = (c_abs(&tmp) + c_abs(str->c)) * 1.8;
 	while (n < str->end)
 	{
 		if (c_abs(&tmp) > cap)
